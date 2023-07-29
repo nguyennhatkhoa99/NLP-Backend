@@ -6,6 +6,8 @@ from api import session
 from flask import request
 
 from api.content_generator.model import ContentGeneratorModel
+
+from api.form.service import FormService
 from api.content_generator.service import ContentGeneratorService
 from api.content_generator import blueprint_api, blueprint
 
@@ -14,11 +16,11 @@ class ContentGeneratorRoute(Resource):
     
     def get(self, id=None):
         try:
-            user_service = ContentGeneratorService()
+            content_service = ContentGeneratorService()
             if id is not None:
-                data = user_service.get(id=id)
+                data = content_service.get(id=id)
                
-            data = user_service.get_all()
+            data = content_service.get_all()
             return {
                     "data": data,
                     "status": "success",
@@ -52,9 +54,14 @@ class ContentGeneratorRoute(Resource):
     def post(self, id=None):
         try:
             data = request.json
-            user_service = ContentGeneratorService()
-            user = user_service.add(data)
-            if user == True:
+            form_id = data["form_id"]
+            check_form_existed =  FormService().get(id=form_id)
+            if check_form_existed["data"] is None:
+                raise Exception()
+            
+            content_service = ContentGeneratorService()
+            generated_content = content_service.add(data)
+            if generated_content:
                 return jsonify(data)
 
         

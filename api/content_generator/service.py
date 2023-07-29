@@ -5,8 +5,8 @@ from flask import jsonify
 class ContentGeneratorService():
     def add(self,data):
         try:
-            user = ContentGeneratorModel(**data)
-            session.add(user)
+            content = ContentGeneratorModel(**data)
+            session.add(content)
             session.commit()
             return True
         except Exception as error:

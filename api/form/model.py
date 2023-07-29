@@ -21,7 +21,6 @@ class FormModel(Base):
     company_website = mapped_column(String(255))
     company_field = mapped_column(String(255))
     company_description = mapped_column(String(255))
-    tone = mapped_column(String(255))
     target_audience = mapped_column(String(255))
     company_social_link = mapped_column(String(255))
     is_startup = mapped_column(Boolean(), default=False)

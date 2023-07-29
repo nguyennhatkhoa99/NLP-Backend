@@ -4,7 +4,9 @@ from flask import jsonify
 
 class FormService():
     company_name: str
-    
+    company_website : str
+    company_field: str
+
 
     def __init__(self, 
                 company_name="",
@@ -49,9 +51,9 @@ class FormService():
     
     def get(self, id):
         try:
-            job = session.query(FormModel).filter_by(id=id).first()
+            form = session.query(FormModel).filter_by(id=id).first()
             return {
-                "data": job.as_dict(),
+                "data": form.as_dict(),
                 "status": "success",
                 "message": "Get job successfully!"
             }
@@ -61,7 +63,6 @@ class FormService():
                 "status": "error",
                 "message": str(error)
             }
-
     def get_all(self):
         try:
             return session.query(FormModel).all()
