@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  backend:
+    image: backend
+    environment:
+      DB_ENGINE: postgresql
+      DB_USERNAME: postgres
+      DB_PASSWORD: khoa
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: chat
+    build:
+      context: .
+    ports:
+      - 5000:5000
+
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: chat
+      POSTGRES_PASSWORD: khoa
+      POSTGRES_USER: postgres
+    ports:
+      - 5435:5432
+    restart: on-failure:3
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+
