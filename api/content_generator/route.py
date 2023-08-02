@@ -55,12 +55,12 @@ class ContentGeneratorRoute(Resource):
         try:
             data = request.json
             form_id = data["form_id"]
-            check_form_existed =  FormService().get(id=form_id)
-            if check_form_existed["data"] is None:
+            form =  FormService().get(id=form_id)
+            if form["data"] is None:
                 raise Exception()
             
             content_service = ContentGeneratorService()
-            generated_content = content_service.add(data)
+            generated_content = content_service.add(data, form_info=form)
             if generated_content:
                 return jsonify(data)
 
