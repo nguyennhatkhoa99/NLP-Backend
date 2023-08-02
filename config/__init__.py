@@ -29,6 +29,7 @@ class Config(object):
     DB_HOST     = os.getenv('DB_HOST'     , None)
     DB_PORT     = os.getenv('DB_PORT'     , None)
     DB_NAME     = os.getenv('DB_NAME'     , None)
+    AI_URL = os.getenv('CORE_AI_URL', 'http://localhost:8000')
 class ProductionConfig(Config):
     DEBUG = False
 
