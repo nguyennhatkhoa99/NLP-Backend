@@ -14,15 +14,15 @@ class FormRoute(Resource):
     
     def get(self, id=None):
         try:
-            user_service = FormService()
+            form_service = FormService()
             if id is not None:
-                data = user_service.get(id=id)
+                data = form_service.get(id=id)
                
-            data = user_service.get_all()
+            data = form_service.get_all()
             return {
                     "data": data,
                     "status": "success",
-                    "message": "Get job successfully!"
+                    "message": "Get all form successfully!"
                 }
         except Exception as error:
             return {

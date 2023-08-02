@@ -1,6 +1,7 @@
 from api.form.model import FormModel
 from api import session
 from flask import jsonify
+import json
 
 class FormService():
     company_name: str
@@ -52,6 +53,7 @@ class FormService():
     def get(self, id):
         try:
             form = session.query(FormModel).filter_by(id=id).first()
+            
             return {
                 "data": form.as_dict(),
                 "status": "success",
@@ -65,7 +67,11 @@ class FormService():
             }
     def get_all(self):
         try:
-            return session.query(FormModel).all()
+            all_form = session.query(FormModel).all()
+            result  = []
+            for form in all_form:
+                result.append(form.as_dict())
+            return result
         except Exception as error:
             print(error)
             session.rollback()
