@@ -70,4 +70,4 @@ class ContentGeneratorRoute(Resource):
             session.rollback()
             return False
 
-blueprint_api.add_resource(ContentGeneratorRoute, '/content_generator','/content_generator/<string:id>')
+blueprint_api.add_resource(ContentGeneratorRoute, '/content-generator','/content-generator/<string:id>')

@@ -21,6 +21,7 @@ class ContentGeneratorModel(Base):
     content_generate = mapped_column(String(255))
     tone = mapped_column(String(255))
 
+
     def __init__(self, **kwargs):
         print(kwargs)
         for property, value in kwargs.items():
