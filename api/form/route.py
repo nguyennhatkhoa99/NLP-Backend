@@ -52,12 +52,19 @@ class FormRoute(Resource):
     def post(self, id=None):
         try:
             data = request.json
-            form_service = FormService(
-                
-            )
+            form_service = FormService()
             form = form_service.add(data)
-            if form == True:
-                return jsonify(data)
+            print(form)
+            if form["status"] == 200:
+                return jsonify(
+                    {
+                        "id": form["id"],
+                        "data": data,
+                        "status": 200,
+                        "message": form["message"]
+                    }
+
+                )
 
         
         except Exception as error:

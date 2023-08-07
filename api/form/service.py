@@ -29,19 +29,27 @@ class FormService():
             form = FormModel(**data)
             
             session.add(form)
+            session.flush()
             session.commit()
-            return True
+            return {
+                "status": 200,
+                "id": form.id,
+                "message": "Form create success"
+            }
         except Exception as error:
             print(error)
             session.rollback()
             return False
         
-    def update(self, id, message=None):
+    def update(self, id, data):
         try:
-            job = session.query(FormModel).filter_by(id=id).first()
-            if job is None:
+            form = session.query(FormModel).filter_by(id=id).first()
+            if form is None:
                 return False
-            job.message = message
+            form.company_name = data.company_name
+            form.company_website = data.company_website
+            form.company_field = data.company_field
+            form.company_description = data.company_description
             session.commit()
             session.flush()
             return True 
@@ -71,9 +79,15 @@ class FormService():
             result  = []
             for form in all_form:
                 result.append(form.as_dict())
+            print(result)
             return result
         except Exception as error:
             print(error)
             session.rollback()
             return False
-        
+    
+    # def soft_delete(self, id=None):
+    #     try:
+    #         form = session.query(FormModel).filter_by(id=id).first()
+            
+    #     except: Exception as error
