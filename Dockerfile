@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-RUN apt update && apt install -y gcc g++ libpq-dev python3-dev
+RUN apt-get update && apt-get install -y gcc g++ libpq-dev python3-dev
 RUN pip install --upgrade pip setuptools
 
 RUN pip install .

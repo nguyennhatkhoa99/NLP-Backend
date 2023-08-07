@@ -20,7 +20,8 @@ setup(
         "psycopg2",
         "flask_security",
         "flask_socketio",
-        "flask_bcrypt"
+        "flask_bcrypt",
+        "flask_cors"
     ],
     extras_require={
         "test": [

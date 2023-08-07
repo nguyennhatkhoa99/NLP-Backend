@@ -2,6 +2,21 @@ version: '3.8'
 
 services:
 
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=chat
+      - POSTGRES_PASSWORD=khoa
+      - POSTGRES_USER=postgres
+    ports:
+      - 5432:5432
+    restart: on-failure:3
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
   backend:
     image: backend
     environment:
@@ -15,21 +30,8 @@ services:
       context: .
     ports:
       - 5000:5000
-
-
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_DB: chat
-      POSTGRES_PASSWORD: khoa
-      POSTGRES_USER: postgres
-    ports:
-      - 5435:5432
     restart: on-failure:3
-
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
-
+  
+    links:
+      - "postgres:postgres"
 

@@ -17,7 +17,12 @@ from config import Config
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS, cross_origin
+
+
 app = Flask(__name__, instance_relative_config=True)
+CORS(app, support_credentials=True)
+
 app.config.from_object(Config)
 login_manager = LoginManager()
 Base = declarative_base()
@@ -31,7 +36,7 @@ url_object = URL.create(
 )
 
 
-engine = create_engine(url = "postgresql://postgres:khoa@localhost:5432/chat", echo=True)
+engine = create_engine(url = "postgresql://postgres:khoa@postgres:5432/chat", echo=True)
 
 session_factory = sessionmaker(bind=engine)
 session = scoped_session(session_factory)
