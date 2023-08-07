@@ -27,9 +27,7 @@ class FormService():
     def add(self,data):
         try:
             form = FormModel(**data)
-            
             session.add(form)
-            session.flush()
             session.commit()
             return {
                 "status": 200,
