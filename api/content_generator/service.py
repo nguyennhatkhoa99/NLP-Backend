@@ -24,7 +24,7 @@ class ContentGeneratorService():
                 return 'abc'
             session.add(content)
             session.commit()
-            return True
+            return response
         except Exception as error:
             print(error)
             session.rollback()

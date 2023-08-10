@@ -26,7 +26,7 @@ class FormModel(Base):
     is_startup = mapped_column(Boolean(), default=False)
     created_at = mapped_column(DateTime, default=datetime.datetime.now)
     updated_at = mapped_column(DateTime, default=datetime.datetime.now)
-    is_deleted = mapped_column(Boolean(), default=False)
+    # is_deleted = mapped_column(Boolean(), default=False)
 
     def __init__(self, **kwargs):
         print(kwargs)
