@@ -64,7 +64,8 @@ class ContentGeneratorRoute(Resource):
             content, generated_content = content_service.add(data, form_info=form)
             if generated_content:
                 content_decoded = codecs.decode(generated_content.content, encoding="utf-8")
-                content_decoded = content_decoded.replace("\\n", "<br>").replace("<br><br>", "<br>")
+                # content_decoded = codecs.decode(generated_content, encoding="utf-8")
+
                 print(content_decoded)
                 update_content = content_service.update(id=content.id, message=content_decoded)
                 if update_content:

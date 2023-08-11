@@ -20,8 +20,7 @@ class ContentGeneratorService():
                 "language": data["language"]
             }
             response = req.post(Config.AI_URL, data=json.dumps(body))
-            # if response.status_code == 200:
-            #     return 'abc'
+            
 
             session.add(content)
             
