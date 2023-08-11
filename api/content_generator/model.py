@@ -18,7 +18,7 @@ class ContentGeneratorModel(Base):
     
     id = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     form_id =  mapped_column(UUID(as_uuid=True), ForeignKey('form.id'))
-    content_generate = mapped_column(String(255))
+    content_generate = mapped_column(Text())
     tone = mapped_column(String(255))
 
     def __init__(self, **kwargs):

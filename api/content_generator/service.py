@@ -20,11 +20,14 @@ class ContentGeneratorService():
                 "language": data["language"]
             }
             response = req.post(Config.AI_URL, data=json.dumps(body))
-            if response.status_code == 200:
-                return 'abc'
+            # if response.status_code == 200:
+            #     return 'abc'
+
             session.add(content)
+            
             session.commit()
-            return response
+   
+            return content, response
         except Exception as error:
             print(error)
             session.rollback()
@@ -35,7 +38,8 @@ class ContentGeneratorService():
             job = session.query(ContentGeneratorModel).filter_by(id=id).first()
             if job is None:
                 return False
-            job.message = message
+            #job.message = message
+            job.content_generate = message
             session.commit()
             session.flush()
             return True 

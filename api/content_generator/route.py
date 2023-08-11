@@ -10,7 +10,8 @@ from api.content_generator.model import ContentGeneratorModel
 from api.form.service import FormService
 from api.content_generator.service import ContentGeneratorService
 from api.content_generator import blueprint_api, blueprint
-
+import codecs
+import re
 @blueprint.route("/")
 class ContentGeneratorRoute(Resource):
     
@@ -60,9 +61,15 @@ class ContentGeneratorRoute(Resource):
                 raise Exception()
             
             content_service = ContentGeneratorService()
-            generated_content = content_service.add(data, form_info=form)
+            content, generated_content = content_service.add(data, form_info=form)
             if generated_content:
-                return jsonify(data)
+                content_decoded = codecs.decode(generated_content.content, encoding="utf-8")
+                content_decoded = content_decoded.replace("\\n", "<br>").replace("<br><br>", "<br>")
+                print(content_decoded)
+                update_content = content_service.update(id=content.id, message=content_decoded)
+                if update_content:
+                    return content_decoded
+            return "error"
 
         
         except Exception as error:
