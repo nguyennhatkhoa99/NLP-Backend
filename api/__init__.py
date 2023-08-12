@@ -36,7 +36,7 @@ url_object = URL.create(
 )
 
 
-engine = create_engine(url = "postgresql://postgres:khoa@localhost:5432/chat", echo=True)
+engine = create_engine(url = "postgresql://postgres:khoa@postgres:5432/chat", echo=True)
 
 session_factory = sessionmaker(bind=engine)
 session = scoped_session(session_factory)
